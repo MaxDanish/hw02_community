@@ -10,7 +10,7 @@ class Group(models.Model):
     description = models.TextField()
 
     def __str__(self):
-        return (str(self.title))
+        return self.title
 
 
 class Post(models.Model):
@@ -25,5 +25,8 @@ class Post(models.Model):
         Group,
         blank=True,
         null=True,
-        on_delete=models.CASCADE
+        on_delete=models.SET_NULL,
+        related_name='posts'
     )
+    class Meta:
+        ordering = ['-pub_date']

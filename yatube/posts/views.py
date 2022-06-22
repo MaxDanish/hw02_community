@@ -3,9 +3,14 @@ from .models import Post, Group
 from django.http import HttpResponse, HttpRequest
 
 
+POSTS_LIMIT: int = 10 
+
 def index(request: HttpResponse) -> HttpRequest:
+    """
+    Передаёт в шаблон posts/index.html десять последних объектов модели Post.
+    """
     template = 'posts/index.html'
-    posts = Post.objects.order_by('-pub_date')[:10]
+    posts = Post.objects.select_related('author')[:POSTS_LIMIT]
     context = {
         'posts': posts
     }
@@ -13,9 +18,13 @@ def index(request: HttpResponse) -> HttpRequest:
 
 
 def group_posts(request, slug):
+    """
+    Передаёт в шаблон posts/group_list.html десять последних объектов модели 
+    Post, отфильтрованных по полю group, и содержимое для тега <title>.
+    """
     template = 'posts/group_list.html'
     group = get_object_or_404(Group, slug=slug)
-    posts = Post.objects.filter(group=group).order_by('-pub_date')[:10]
+    posts = Post.objects.filter(group=group)[:POSTS_LIMIT]
     context = {
         'slug': slug,
         'group': group,
