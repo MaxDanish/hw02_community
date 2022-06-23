@@ -3,7 +3,8 @@ from .models import Post, Group
 from django.http import HttpResponse, HttpRequest
 
 
-POSTS_LIMIT: int = 10 
+POSTS_LIMIT: int = 10
+
 
 def index(request: HttpResponse) -> HttpRequest:
     """
@@ -19,7 +20,7 @@ def index(request: HttpResponse) -> HttpRequest:
 
 def group_posts(request, slug):
     """
-    Передаёт в шаблон posts/group_list.html десять последних объектов модели 
+    Передаёт в шаблон posts/group_list.html десять последних объектов модели
     Post, отфильтрованных по полю group, и содержимое для тега <title>.
     """
     template = 'posts/group_list.html'
