@@ -28,13 +28,14 @@
     <meta name="theme-color" content="#ffffff">
     <!-- Подключен файл со стандартными стилями бустрап -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    {% block title %}
-      <title>Название страницы</title>
-    {% endblock %}
+    <title>
+      {% block title %}
+        Название страницы
+      {% endblock %}
+    </title>
   </head>
   <body>
     <header>
-      <!-- Это тег шаблонизатора include, сюда будет включён код из файла includes/header.html -->
       {% include 'includes/header.html' %}
     </header>
     <main> 
