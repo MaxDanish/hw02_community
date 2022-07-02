@@ -10,8 +10,7 @@
     {% for post in page_obj %}
     {% include 'includes/post.html' %}
       {% if post.group %}   
-        <a 
-          href="{% url 'posts:group_list' post.group.slug %}"
+        <a href="{% url 'posts:group_list' post.group.slug %}"
           >все записи группы</a>
       {% endif %}  
       <!-- под последним постом нет линии -->
